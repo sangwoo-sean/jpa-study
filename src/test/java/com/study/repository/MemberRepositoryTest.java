@@ -19,7 +19,7 @@ class MemberRepositoryTest {
     void testMember() {
         //g
         Member member = new Member();
-        member.setUsername("member");
+        member.setName("member");
 
         //w
         Long save = memberRepository.save(member);
