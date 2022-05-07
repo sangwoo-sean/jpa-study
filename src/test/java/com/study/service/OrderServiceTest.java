@@ -4,6 +4,7 @@ import com.study.exception.NotEnoughStockException;
 import com.study.model.domain.Address;
 import com.study.model.domain.Member;
 import com.study.model.domain.Order;
+import com.study.model.domain.OrderSearch;
 import com.study.model.domain.item.Book;
 import com.study.model.domain.item.Item;
 import com.study.model.enums.OrderStatus;
@@ -14,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -96,5 +99,22 @@ class OrderServiceTest {
 
         assertEquals(OrderStatus.CANCEL, getOrder.getStatus());
         assertEquals(10, book.getStockQuantity());
+    }
+
+    @Test
+    void 상품검색() {
+        //given
+        Member member = createMember("상우", new Address("서울", "마포구", "03965"));
+        Item book = createItem("JPA", 10000, 10);
+        int orderCount = 2;
+        Long orderId = orderService.order(member.getId(), book.getId(), orderCount);
+
+        //when
+        OrderSearch orderSearch = new OrderSearch();
+        orderSearch.setOrderStatus(OrderStatus.ORDERED);
+        List<Order> orders = orderService.findOrders(orderSearch);
+
+        //then
+        assertEquals(1, orders.size());
     }
 }

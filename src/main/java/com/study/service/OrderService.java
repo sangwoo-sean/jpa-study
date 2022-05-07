@@ -1,9 +1,6 @@
 package com.study.service;
 
-import com.study.model.domain.Delivery;
-import com.study.model.domain.Member;
-import com.study.model.domain.Order;
-import com.study.model.domain.OrderItem;
+import com.study.model.domain.*;
 import com.study.model.domain.item.Item;
 import com.study.repository.ItemRepository;
 import com.study.repository.MemberRepository;
@@ -55,5 +52,7 @@ public class OrderService {
     }
 
     //검색
-//    public List<Order> findOrders() {}
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAll(orderSearch);
+    }
 }
