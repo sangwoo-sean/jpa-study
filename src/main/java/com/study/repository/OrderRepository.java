@@ -29,7 +29,7 @@ public class OrderRepository {
         return em.find(Order.class, id);
     }
 
-    public List<Order> findAll(OrderSearch orderSearch) {
+    public List<Order> findAllByQuery(OrderSearch orderSearch) {
         QOrder order = QOrder.order;
         QMember member = QMember.member;
 
@@ -38,7 +38,7 @@ public class OrderRepository {
                 .from(order)
                 .join(order.member, member)
                 .where(statusEq(orderSearch.getOrderStatus()),
-                        nameLike(orderSearch.getMemerName()))
+                        nameLike(orderSearch.getMemberName()))
                 .limit(1000)
                 .fetch();
     }
