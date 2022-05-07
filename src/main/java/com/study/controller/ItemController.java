@@ -1,6 +1,7 @@
 package com.study.controller;
 
 import com.study.model.domain.item.Book;
+import com.study.model.domain.item.Item;
 import com.study.model.form.BookForm;
 import com.study.service.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -11,12 +12,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class ItemController {
 
     private final ItemService itemService;
+
+    @GetMapping("/items")
+    public String itemList(Model model) {
+        List<Item> items = itemService.findItems();
+        model.addAttribute("items", items);
+        return "items/itemList";
+    }
 
     @GetMapping("/items/new")
     public String item(Model model) {
