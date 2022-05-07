@@ -25,4 +25,10 @@ public class Book extends Item {
         book.setIsbn(form.getIsbn());
         return book;
     }
+
+    public void update(BookForm form) {
+        super.update(form.getStockQuantity(), form.getPrice(), form.getName());
+        this.author = form.getAuthor();
+        this.isbn = form.getIsbn();
+    }
 }

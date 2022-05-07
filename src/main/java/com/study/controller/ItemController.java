@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -40,5 +41,19 @@ public class ItemController {
         Book book = Book.createBook(form);
         itemService.saveItem(book);
         return "redirect:/";
+    }
+
+    @GetMapping("/items/{itemId}/edit")
+    public String updateItem(@PathVariable("itemId") Long itemId, Model model) {
+        Book item = (Book) itemService.findById(itemId);
+        BookForm bookForm = BookForm.updateFormPreprocess(item);
+        model.addAttribute("bookForm", bookForm);
+        return "items/updateItemForm";
+    }
+
+    @PostMapping("/items/{itemId}/edit")
+    public String updateItem(@PathVariable Long itemId, BookForm bookForm) {
+        itemService.updateBook(itemId, bookForm);
+        return "redirect:/items";
     }
 }

@@ -1,5 +1,6 @@
 package com.study.repository;
 
+import com.study.model.domain.item.Book;
 import com.study.model.domain.item.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -24,6 +25,10 @@ public class ItemRepository {
 
     public Item findById(Long id) {
         return em.find(Item.class, id);
+    }
+
+    public Book findBookById(Long id) {
+        return em.find(Book.class, id);
     }
 
     public List<Item> findAll() {

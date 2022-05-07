@@ -40,4 +40,10 @@ public abstract class Item {
         }
         this.stockQuantity = restStock;
     }
+
+    protected void update(int stockQuantity, int price, String name) {
+        this.stockQuantity = stockQuantity;
+        this.price = price;
+        this.name = name;
+    }
 }
