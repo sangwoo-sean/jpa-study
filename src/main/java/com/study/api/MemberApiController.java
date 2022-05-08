@@ -2,6 +2,8 @@ package com.study.api;
 
 import com.study.model.domain.Address;
 import com.study.model.domain.Member;
+import com.study.model.dto.ApiResult;
+import com.study.model.dto.MemberDto;
 import com.study.service.MemberService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -64,5 +68,14 @@ public class MemberApiController {
     private static class UpdateMemberRequest {
         @NotEmpty(message = "이름을 입력해주세요.")
         private String name;
+    }
+
+    @GetMapping("/api/members")
+    public ApiResult memberList() {
+        List<MemberDto> members = memberService.findMembers()
+                .stream()
+                .map(MemberDto::new)
+                .collect(Collectors.toList());
+        return new ApiResult(members);
     }
 }
