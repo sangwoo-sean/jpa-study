@@ -1,5 +1,6 @@
 package com.study.service;
 
+import com.study.api.MemberApiController;
 import com.study.model.domain.Member;
 import com.study.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,5 +39,11 @@ public class MemberService {
 
     public Member findById(Long memberId) {
         return memberRepository.findById(memberId);
+    }
+
+    @Transactional
+    public void update(Long memberId, String name) {
+        Member member = memberRepository.findById(memberId);
+        member.setName(name);
     }
 }
