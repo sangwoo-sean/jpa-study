@@ -5,7 +5,7 @@
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
     <div>
-        <form action="/order" method="post">
+        <form action="/order/multiple" method="post">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -28,6 +28,7 @@
                         <a href="#" th:href="@{/cart/{id}/delete (id=${cart.id})}"
                            class="btn" role="button">❌</a>
                     </td>
+                    <input type="text" id="cartIds" name="cartIds" hidden th:value="${cart.id}"/>
                 </tr>
                 </tbody>
             </table>

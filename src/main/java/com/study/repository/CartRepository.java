@@ -41,4 +41,8 @@ public class CartRepository {
                 .setParameter("cartId", cartId)
                 .executeUpdate();
     }
+
+    public Cart findById(Long cartId) {
+        return em.find(Cart.class, cartId);
+    }
 }
