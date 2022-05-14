@@ -27,7 +27,10 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member")
+    private List<Cart> carts = new ArrayList<>();
 
+    //== 회원가입 ==//
     public static Member createMember(MemberForm memberForm) {
         Member member = new Member();
         member.setName(memberForm.getName());
