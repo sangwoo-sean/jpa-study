@@ -4,6 +4,7 @@ import com.study.model.domain.Address;
 import com.study.model.domain.Member;
 import com.study.model.form.MemberForm;
 import com.study.service.MemberService;
+import com.study.validator.MemberValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import java.util.List;
 public class MemberController {
 
     private final MemberService memberService;
+    private final MemberValidator memberValidator;
 
     @GetMapping("/members/new")
     public String createForm(Model model) {
@@ -27,14 +29,15 @@ public class MemberController {
     }
 
     @PostMapping("/members/new")
-    public String createForm(@Valid MemberForm form, BindingResult result) {
+    public String createForm(@Valid MemberForm memberForm, BindingResult result, Model model) {
+        memberValidator.validate(memberForm, result);
         if (result.hasErrors()) {
             return "members/createMemberForm";
         }
-        Address address = new Address(form.getCity(), form.getStreet(), form.getZipcode());
-        Member member = new Member();
-        member.setName(form.getName());
-        member.setAddress(address);
+
+//        Address address = new Address(form.getCity(), form.getStreet(), form.getZipcode());
+        Member member = Member.createMember(memberForm);
+//        member.setAddress(address);
         memberService.join(member);
         return "redirect:/";
     }

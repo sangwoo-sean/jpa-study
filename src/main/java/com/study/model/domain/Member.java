@@ -1,5 +1,6 @@
 package com.study.model.domain;
 
+import com.study.model.form.MemberForm;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,8 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
+    private String password;
+
     private String name;
 
     @Embedded
@@ -23,4 +26,12 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
+
+
+    public static Member createMember(MemberForm memberForm) {
+        Member member = new Member();
+        member.setName(memberForm.getName());
+        member.setPassword(memberForm.getPassword());
+        return member;
+    }
 }

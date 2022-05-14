@@ -15,8 +15,21 @@
             <label th:for="name">이름</label>
             <input type="text" th:field="*{name}" class="form-control" placeholder="이름을 입력하세요"
                    th:class="${#fields.hasErrors('name')}? 'form-control fieldError' : 'form-control'">
-            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect date</p>
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
         </div>
+        <div class="form-group">
+            <label th:for="password">비밀번호</label>
+            <input type="password" th:field="*{password}" class="form-control" placeholder="비밀번호를 입력하세요"
+                   th:class="${#fields.hasErrors('password')}? 'form-control fieldError' : 'form-control'">
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+        </div>
+        <div class="form-group">
+            <label th:for="password_check">비밀번호 확인</label>
+            <input type="password" th:field="*{password_check}" class="form-control" placeholder="비밀번호 확인을 입력하세요"
+                   th:class="${#fields.hasErrors('password_check')}? 'form-control fieldError' : 'form-control'">
+            <p th:if="${#fields.hasErrors('password_check')}" th:errors="*{password_check}"></p>
+        </div>
+        <!--
         <div class="form-group">
             <label th:for="city">도시</label>
             <input type="text" th:field="*{city}" class="form-control" placeholder="도시를 입력하세요">
@@ -29,7 +42,9 @@
             <label th:for="zipcode">우편번호</label>
             <input type="text" th:field="*{zipcode}" class="form-control" placeholder="우편번호를 입력하세요">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        -->
+        <button type="submit" class="btn btn-primary">가입하기</button>
+        <a href="/" class="btn btn-secondary">뒤로가기</a>
     </form>
     <br/>
     <div th:replace="fragments/footer :: footer"/>
