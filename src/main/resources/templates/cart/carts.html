@@ -14,15 +14,20 @@
                     <th>가격</th>
                     <th>수량</th>
                     <th>합산가격</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="cart : ${carts}">
-                    <td th:text="${cart.id}"></td>
+                    <td th:text="${cartStat.count}"></td>
                     <td th:text="${cart.item_name}"></td>
                     <td th:text="${cart.price}"></td>
                     <td th:text="${cart.quantity}"></td>
                     <td th:text="${cart.total_price}"></td>
+                    <td>
+                        <a href="#" th:href="@{/cart/{id}/delete (id=${cart.id})}"
+                           class="btn" role="button">❌</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

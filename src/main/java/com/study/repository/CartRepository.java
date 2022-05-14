@@ -35,4 +35,10 @@ public class CartRepository {
                 .setParameter("itemId", itemId)
                 .getResultList();
     }
+
+    public void deleteCartById(Long cartId) {
+        em.createQuery("delete from Cart c where c.id = :cartId")
+                .setParameter("cartId", cartId)
+                .executeUpdate();
+    }
 }
