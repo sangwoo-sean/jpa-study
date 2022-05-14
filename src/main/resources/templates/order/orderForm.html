@@ -35,11 +35,30 @@
 </div> <!-- /container -->
 <script>
     function addItemToCart() {
-        let memberId = document.querySelector('#member').value;
-        let itemId = document.querySelector('#item').value;
-        let quantity = document.querySelector('#count').value;
+        const memberId = document.querySelector('#member').value;
+        const itemId = document.querySelector('#item').value;
+        const quantity = document.querySelector('#count').value;
 
-        // fetch('/api/cart')
+        const data = {
+            memberId,
+            itemId,
+            quantity
+        }
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json;'
+            },
+            body: JSON.stringify(data)
+        }
+        fetch('/api/cart', options)
+            .then(res => res.json())
+            .then(res => {
+                alert('상품이 장바구니에 담겼습니다.');
+            })
+            .catch(e => {
+                console.error(e);
+            });
     }
 </script>
 </body>
