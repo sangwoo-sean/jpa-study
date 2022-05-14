@@ -26,4 +26,13 @@ public class CartRepository {
                 .setParameter("memberId", memberId)
                 .getResultList();
     }
+
+    public List<Cart> findByMemberIdAndItemId(Long memberId, Long itemId) {
+        return em.createQuery("select c from Cart c" +
+                        " where c.member.id = :memberId" +
+                        " and c.item.id = :itemId", Cart.class)
+                .setParameter("memberId", memberId)
+                .setParameter("itemId", itemId)
+                .getResultList();
+    }
 }

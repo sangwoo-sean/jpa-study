@@ -28,10 +28,19 @@
             <input type="number" name="count" class="form-control" id="count" placeholder="주문 수량을 입력하세요">
         </div>
         <button type="submit" class="btn btn-primary mt-3">바로주문</button>
-        <button type="button" class="btn btn-success mt-3">장바구니</button>
+        <button type="button" onclick="addItemToCart();" class="btn btn-success mt-3">장바구니</button>
     </form>
     <br/>
     <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->
+<script>
+    function addItemToCart() {
+        let memberId = document.querySelector('#member').value;
+        let itemId = document.querySelector('#item').value;
+        let quantity = document.querySelector('#count').value;
+
+        // fetch('/api/cart')
+    }
+</script>
 </body>
 </html>
